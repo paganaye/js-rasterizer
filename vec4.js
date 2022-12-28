@@ -1,86 +1,70 @@
 var vec4 = {};
 
-vec4.create = function()
-{
+vec4.create = function () {
 	return new Float32Array([0, 0, 0, 0]);
 }
 
-vec4.fromValues = function(x, y, z, w)
-{
+vec4.fromValues = function (x, y, z, w) {
 	return new Float32Array([x, y, z, w]);
 }
 
-vec4.str = function(v)
-{
+vec4.str = function (v) {
 	return "vec4(" + v[0] + ", " + v[1] + ", " + v[2] + ", " + v[3] + ")";
 }
 
-vec4.len = function(v)
-{
+vec4.len = function (v) {
 	return Math.sqrt(vec4.sqrLen(v));
 }
 
-vec4.sqrLen = function(v)
-{
+vec4.sqrLen = function (v) {
 	return vec4.dot(v, v);
 }
 
-vec4.neg = function(v)
-{
-	return[-v[0], -v[1], -v[2], -v[3]];
+vec4.neg = function (v) {
+	return [-v[0], -v[1], -v[2], -v[3]];
 }
 
-vec4.normalized = function(v)
-{
+vec4.normalized = function (v) {
 	len = vec4.len(v);
-	if(len == 0)
+	if (len == 0)
 		return vec4.create();
 	else
 		return vec4.scale(1 / len, v);
 }
 
-vec4.add = function(v1, v2)
-{
+vec4.add = function (v1, v2) {
 	return [v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2], v1[3] + v2[3]];
 }
 
-vec4.sub = function(v1, v2)
-{
+vec4.sub = function (v1, v2) {
 	return vec4.add(v1, vec4.neg(v2));
 }
 
-vec4.mul = function(v1, v2)
-{
+vec4.mul = function (v1, v2) {
 	return [v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2], v1[3] * v2[3]];
 }
 
-vec4.scale = function(a, v)
-{
+vec4.scale = function (a, v) {
 	return [a * v[0], a * v[1], a * v[2], a * v[3]];
 }
 
-vec4.dot = function(v1, v2)
-{
+vec4.dot = function (v1, v2) {
 	return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2] + v1[3] * v2[3];
 }
 
-vec4.cross = function(v1, v2)
-{
+vec4.cross = function (v1, v2) {
 	return [v1[1] * v2[2] - v1[2] * v2[1], v1[2] * v2[0] - v1[0] * v2[2], v1[0] * v2[1] - v1[1] * v2[0], 0];
 }
 
-vec4.exactEquals = function(v1, v2)
-{
+vec4.exactEquals = function (v1, v2) {
 	return v1[0] === v2[0] && v1[1] === v2[1] && v1[2] === v2[2] && v1[3] === v2[3];
 }
 
-vec4.equals = function(v1, v2)
-{
+vec4.equals = function (v1, v2) {
 	return vec4.len(vec4.sub(v1, v2)) < 0.000001;
 }
 
-vec4.unitTest = function()
-{
+vec4.unitTest = function () {
 	var a = vec4.create();
 	a[0] = 1;
 	a[3] = 2;
